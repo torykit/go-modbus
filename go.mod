@@ -1,4 +1,4 @@
-module github.com/things-go/go-modbus
+module github.com/torykit/go-modbus
 
 go 1.15
 
