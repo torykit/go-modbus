@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"time"
 
-	modbus "github.com/things-go/go-modbus"
+	modbus "github.com/torykit/go-modbus"
 )
 
 func main() {
-	p := modbus.NewTCPClientProvider("localhost:502", modbus.WithEnableLogger())
+	p := modbus.NewTCPClientProvider("10.211.55.3:502", modbus.WithEnableLogger())
 	client := modbus.NewClient(p)
 	err := client.Connect()
 	if err != nil {
@@ -19,10 +19,12 @@ func main() {
 
 	fmt.Println("starting")
 	for {
-		_, err := client.ReadCoils(1, 0, 10)
+		results, err := client.ReadHoldingRegisters(1, 0, 10)
 		if err != nil {
 			fmt.Println(err.Error())
 		}
+
+		fmt.Println(results)
 
 		//	fmt.Printf("ReadDiscreteInputs %#v\r\n", results)
 
